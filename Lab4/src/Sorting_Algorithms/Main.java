@@ -11,6 +11,7 @@ public class Main {
         SortFactory<Integer> sf = new SimpleSort_Factory<>();
         SortFactory<Integer> sf2 = new EfficientSort_Factory<>();
         SortFactory<Integer> sf3 = new HeapSort_Factory<>();
+        SortFactory<Integer> sf4 = new NonComparisonSort_Factory<>();
 
         Function<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> myF =
                 sf.getSortingAlgorithm("Insertion Sort");
@@ -20,6 +21,9 @@ public class Main {
 
         Function<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> myF3 =
                 sf3.getSortingAlgorithm("Heap Sort");
+
+        Function<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> myF4 =
+                sf4.getSortingAlgorithm("Counting Sort");
 
         ArrayList<ArrayList<Integer>> steps = myF.apply((ArrayList<Integer>)(myList.clone()));
         displaySteps(steps);
@@ -32,6 +36,11 @@ public class Main {
         System.out.println();
 
         steps = myF3.apply((ArrayList<Integer>)(myList.clone()));
+        displaySteps(steps);
+
+        System.out.println();
+
+        steps = myF4.apply((ArrayList<Integer>)(myList.clone()));
         displaySteps(steps);
     }
 
