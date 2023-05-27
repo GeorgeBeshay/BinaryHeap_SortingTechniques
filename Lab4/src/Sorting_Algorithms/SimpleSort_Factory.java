@@ -9,14 +9,11 @@ public class SimpleSort_Factory<T extends Comparable<T>> extends SortFactory<T>{
     public Function<ArrayList<T>, ArrayList<ArrayList<T>>> getSortingAlgorithm(String algorithmName) {
         switch (algorithmName){
             case "Selection Sort":
-                // bla bla
                 return this::selectionSort;
             case "Bubble Sort":
-                // bla bla
-                break;
+                return this::bubbleSort;
             case "Insertion Sort":
-                // bla bla
-                break;
+                return this::insertionSort;
             default:
                 break;
         }
@@ -44,8 +41,25 @@ public class SimpleSort_Factory<T extends Comparable<T>> extends SortFactory<T>{
         return null;
     }
 
-    public ArrayList<ArrayList<T>> insertionSort(ArrayList<T> input){
-        return null;
+    public ArrayList<ArrayList<T>> insertionSort (ArrayList<T> list) {
+        ArrayList<ArrayList<T>> ordered_list = new ArrayList<>();
+        ordered_list.add((ArrayList<T>) list.clone());
+        // start from 1 as the leftmost is already sorted
+        for(int i=1 ; i< list.size() ; i++) {
+            int j = i;
+            while((j > 0) && (list.get(j - 1).compareTo(list.get(j)) > 0)) {
+                swap(list , j-1 ,  j);
+                j--;
+            }
+            ordered_list.add((ArrayList<T>) list.clone());
+        }
+        return ordered_list;
+    }
+
+    private void swap(ArrayList<T> list, int i, int j) {
+        T temp = list.get(j);
+        list.set(j , list.get(i));
+        list.set(i , temp);
     }
 
 }
