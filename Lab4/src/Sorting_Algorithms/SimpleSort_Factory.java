@@ -42,6 +42,7 @@ public class SimpleSort_Factory<T extends Comparable<T>> extends SortFactory<T>{
     }
 
     public ArrayList<ArrayList<T>> insertionSort (ArrayList<T> list) {
+        list = (ArrayList<T>)list.clone();
         ArrayList<ArrayList<T>> ordered_list = new ArrayList<>();
         ordered_list.add((ArrayList<T>) list.clone());
         // start from 1 as the leftmost is already sorted

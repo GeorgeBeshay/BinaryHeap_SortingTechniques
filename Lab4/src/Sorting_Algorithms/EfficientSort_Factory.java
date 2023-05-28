@@ -29,10 +29,60 @@ public class EfficientSort_Factory <T extends Comparable<T>> extends SortFactory
 
     // Assigned to >> George Selim.
     public ArrayList<ArrayList<T>> mergeSort(ArrayList<T> input){
-        return null;
+        input = (ArrayList<T>)input.clone();
+        ArrayList<ArrayList<T>> result = new ArrayList<>();
+        result.add(new ArrayList<>(input)); // Add the initial input list to the result
+        mergeSortHelper(input, result);
+        return result;
+    }
+
+    private ArrayList<T> mergeSortHelper(ArrayList<T> input, ArrayList<ArrayList<T>> result) {
+        if (input.size() <= 1) {
+            result.add(input);
+            return input;
+        }
+
+        int mid = input.size() / 2;
+        ArrayList<T> left = new ArrayList<>(input.subList(0, mid));
+        ArrayList<T> right = new ArrayList<>(input.subList(mid, input.size()));
+
+        ArrayList<T> leftResult = mergeSortHelper(left, result);
+        ArrayList<T> rightResult = mergeSortHelper(right, result);
+
+        return merge(leftResult, rightResult, result);
+    }
+
+    private ArrayList<T> merge(ArrayList<T> left, ArrayList<T> right, ArrayList<ArrayList<T>> result) {
+        ArrayList<T> merged = new ArrayList<>();
+        int leftIndex = 0;
+        int rightIndex = 0;
+
+        while (leftIndex < left.size() && rightIndex < right.size()) {
+            if (left.get(leftIndex).compareTo(right.get(rightIndex)) <= 0) {
+                merged.add(left.get(leftIndex));
+                leftIndex++;
+            } else {
+                merged.add(right.get(rightIndex));
+                rightIndex++;
+            }
+        }
+
+        while (leftIndex < left.size()) {
+            merged.add(left.get(leftIndex));
+            leftIndex++;
+        }
+
+        while (rightIndex < right.size()) {
+            merged.add(right.get(rightIndex));
+            rightIndex++;
+        }
+
+        result.add(new ArrayList<>(merged)); // Add the merged list to the result
+        return merged;
     }
 
     public ArrayList<ArrayList<T>> quickSort (ArrayList<T> list) {
+        list = (ArrayList<T>)list.clone();
         ArrayList<ArrayList<T>> ordered_list = new ArrayList<>();
         if (list == null || list.size() == 0)
             return ordered_list;

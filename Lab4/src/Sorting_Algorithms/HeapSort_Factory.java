@@ -15,6 +15,7 @@ public class HeapSort_Factory <T extends Comparable<T>> extends SortFactory<T>{
     }
 
     public ArrayList<ArrayList<T>> heapSort(ArrayList<T> input){
+        input = (ArrayList<T>)input.clone();
         Heap_IF<T> heap = new Min_Heap<>(input.toArray((T[])(new Comparable[input.size()])));
         ArrayList<ArrayList<T>> steps = new ArrayList<>();
         T[] output = (T[]) new Comparable[input.size()];

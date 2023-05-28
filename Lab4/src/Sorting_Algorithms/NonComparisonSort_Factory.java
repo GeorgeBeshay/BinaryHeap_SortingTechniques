@@ -32,6 +32,7 @@ public class NonComparisonSort_Factory<T extends Comparable<T>> extends SortFact
             return null;
         if(!in.isEmpty() && !(in.get(0) instanceof Integer))
             return null;
+        in = (ArrayList<T>)in.clone();
         ArrayList<ArrayList<T>> steps = new ArrayList<>();
         ArrayList<Integer> input = (ArrayList<Integer>) in;
         int max = Collections.max(input), min = Collections.min(input);

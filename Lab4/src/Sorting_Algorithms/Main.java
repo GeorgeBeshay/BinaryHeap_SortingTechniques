@@ -7,6 +7,7 @@ import java.util.function.Function;
 public class Main {
     public static void main(String[] args) {
         ArrayList<Integer> myList = new ArrayList<>(Arrays.asList(-1, -5, 0, 10, -100));
+        ArrayList<ArrayList<Integer>> steps;
 
         SortFactory<Integer> sf = new SimpleSort_Factory<>();
         SortFactory<Integer> sf2 = new EfficientSort_Factory<>();
@@ -25,22 +26,30 @@ public class Main {
         Function<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> myF4 =
                 sf4.getSortingAlgorithm("Counting Sort");
 
-        ArrayList<ArrayList<Integer>> steps = myF.apply((ArrayList<Integer>)(myList.clone()));
+        Function<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> myF5 =
+                sf2.getSortingAlgorithm("Merge Sort");
+
+        steps = myF.apply(myList);
         displaySteps(steps);
 
         System.out.println();
 
-        steps = myF2.apply((ArrayList<Integer>)(myList.clone()));
+        steps = myF2.apply(myList);
         displaySteps(steps);
 
         System.out.println();
 
-        steps = myF3.apply((ArrayList<Integer>)(myList.clone()));
+        steps = myF3.apply(myList);
         displaySteps(steps);
 
         System.out.println();
 
-        steps = myF4.apply((ArrayList<Integer>)(myList.clone()));
+        steps = myF4.apply(myList);
+        displaySteps(steps);
+
+        System.out.println();
+
+        steps = myF5.apply(myList);
         displaySteps(steps);
     }
 
