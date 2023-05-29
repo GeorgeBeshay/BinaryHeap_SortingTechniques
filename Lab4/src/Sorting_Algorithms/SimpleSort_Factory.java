@@ -9,9 +9,9 @@ public class SimpleSort_Factory<T extends Comparable<T>> extends SortFactory<T>{
     public Function<ArrayList<T>, ArrayList<ArrayList<T>>> getSortingAlgorithm(String algorithmName) {
         switch (algorithmName){
             case "Selection Sort":
-                return this::selectionSort;
+                return this::insertionSort; // TODO: Change the returned function
             case "Bubble Sort":
-                return this::bubbleSort;
+                return this::insertionSort; // TODO: Change the returned function
             case "Insertion Sort":
                 return this::insertionSort;
             default:

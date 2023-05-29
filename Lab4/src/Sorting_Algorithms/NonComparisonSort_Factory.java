@@ -21,6 +21,10 @@ public class NonComparisonSort_Factory<T extends Comparable<T>> extends SortFact
         switch (algorithmName){
             case "Counting Sort":
                 return this::countingSort;
+            case "Radix Sort":
+                return this::countingSort; // TODO: Change the returned function.
+            default:
+                break;
         }
         return null;
     }
