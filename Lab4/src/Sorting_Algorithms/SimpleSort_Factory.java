@@ -1,12 +1,13 @@
 package Sorting_Algorithms;
 
 import java.util.ArrayList;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class SimpleSort_Factory<T extends Comparable<T>> extends SortFactory<T>{
 
     @Override
-    public Function<ArrayList<T>, ArrayList<ArrayList<T>>> getSortingAlgorithm(String algorithmName) {
+    public BiFunction<ArrayList<T>, Boolean, ArrayList<ArrayList<T>>> getSortingAlgorithm(String algorithmName) {
         switch (algorithmName){
             case "Selection Sort":
                 return this::insertionSort; // TODO: Change the returned function
@@ -30,18 +31,18 @@ public class SimpleSort_Factory<T extends Comparable<T>> extends SortFactory<T>{
 
     // The below functions are assigned to >> Islam & Mkario
 
-    public ArrayList<ArrayList<T>> selectionSort(ArrayList<T> input){
+    public ArrayList<ArrayList<T>> selectionSort(ArrayList<T> input, boolean stepsRequired){
         System.out.println("In Selection Sort ...");
         // Implement Me
         return null;
     }
 
-    public ArrayList<ArrayList<T>> bubbleSort(ArrayList<T> input){
+    public ArrayList<ArrayList<T>> bubbleSort(ArrayList<T> input, boolean stepsRequired){
 
         return null;
     }
 
-    public ArrayList<ArrayList<T>> insertionSort (ArrayList<T> list) {
+    public ArrayList<ArrayList<T>> insertionSort (ArrayList<T> list, boolean stepsRequired) {
         list = (ArrayList<T>)list.clone();
         ArrayList<ArrayList<T>> ordered_list = new ArrayList<>();
         ordered_list.add((ArrayList<T>) list.clone());
@@ -52,8 +53,11 @@ public class SimpleSort_Factory<T extends Comparable<T>> extends SortFactory<T>{
                 swap(list , j-1 ,  j);
                 j--;
             }
-            ordered_list.add((ArrayList<T>) list.clone());
+            if(stepsRequired)
+                ordered_list.add((ArrayList<T>) list.clone());
         }
+        if(!stepsRequired)
+            ordered_list.add((ArrayList<T>) list.clone());
         return ordered_list;
     }
 

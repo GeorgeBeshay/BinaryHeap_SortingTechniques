@@ -1,8 +1,8 @@
 package Sorting_Algorithms;
 
-import java.util.function.Function;
 import java.util.*;
+import java.util.function.*;
 
 public abstract class SortFactory<T extends Comparable<T>> {
-    public abstract Function<ArrayList<T>, ArrayList<ArrayList<T>>> getSortingAlgorithm(String algorithmName);
+    public abstract BiFunction<ArrayList<T>, Boolean, ArrayList<ArrayList<T>>> getSortingAlgorithm(String algorithmName);
 }

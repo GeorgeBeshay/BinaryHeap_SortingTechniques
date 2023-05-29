@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class NonComparisonSort_Factory<T extends Comparable<T>> extends SortFactory<T> {
@@ -17,7 +18,7 @@ public class NonComparisonSort_Factory<T extends Comparable<T>> extends SortFact
      */
 
     @Override
-    public Function<ArrayList<T>, ArrayList<ArrayList<T>>> getSortingAlgorithm(String algorithmName) {
+    public BiFunction<ArrayList<T>, Boolean, ArrayList<ArrayList<T>>> getSortingAlgorithm(String algorithmName) {
         switch (algorithmName){
             case "Counting Sort":
                 return this::countingSort;
@@ -31,7 +32,7 @@ public class NonComparisonSort_Factory<T extends Comparable<T>> extends SortFact
 
     // Assigned To Mariam & George
 
-    public ArrayList<ArrayList<T>> countingSort(ArrayList<T> in){
+    public ArrayList<ArrayList<T>> countingSort(ArrayList<T> in, boolean stepsRequired){
         if(in == null)
             return null;
         if(!in.isEmpty() && !(in.get(0) instanceof Integer))
@@ -50,12 +51,15 @@ public class NonComparisonSort_Factory<T extends Comparable<T>> extends SortFact
         countArray[0] = 0;
         for (Integer integer : input) {
             output[countArray[integer - min]++] = (T) integer;
-            steps.add(new ArrayList<>(Arrays.asList(output)));
+            if(stepsRequired)
+                steps.add(new ArrayList<>(Arrays.asList(output)));
         }
+        if(!stepsRequired)
+            steps.add(new ArrayList<>(Arrays.asList(output)));
         return steps;
     }
 
-    public ArrayList<ArrayList<T>> radixSort(ArrayList<T> input){
+    public ArrayList<ArrayList<T>> radixSort(ArrayList<T> input, boolean stepsRequired){
         return null;
     }
 

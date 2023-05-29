@@ -3,7 +3,7 @@ import Sorting_Algorithms.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.function.Function;
+import java.util.function.*;
 import java.io.*;
 
 public class CLI {
@@ -32,7 +32,7 @@ public class CLI {
         boolean displayIntermediateSteps = false;
         ArrayList<Integer> input = null;
         ArrayList<ArrayList<Integer>> steps;
-        Function<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> mySortingFunction;
+        BiFunction<ArrayList<Integer>, Boolean, ArrayList<ArrayList<Integer>>> mySortingFunction;
         while(true){
             while(input == null) {
                 System.out.println("Enter The File Name:");
@@ -83,7 +83,7 @@ public class CLI {
                     tempChoiceNumber = scanner.nextInt();
                 }
                 displayIntermediateSteps = (tempChoiceNumber) == 1;
-                steps = mySortingFunction.apply(input);
+                steps = mySortingFunction.apply(input, displayIntermediateSteps);
                 displaySteps(steps, displayIntermediateSteps);
                 System.out.println();
             }

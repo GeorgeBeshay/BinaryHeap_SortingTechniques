@@ -2,7 +2,7 @@ package Sorting_Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Function;
+import java.util.function.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,42 +14,42 @@ public class Main {
         SortFactory<Integer> sf3 = new HeapSort_Factory<>();
         SortFactory<Integer> sf4 = new NonComparisonSort_Factory<>();
 
-        Function<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> myF =
+        BiFunction<ArrayList<Integer>, Boolean, ArrayList<ArrayList<Integer>>> myF =
                 sf.getSortingAlgorithm("Insertion Sort");
 
-        Function<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> myF2 =
+        BiFunction<ArrayList<Integer>, Boolean, ArrayList<ArrayList<Integer>>> myF2 =
                 sf2.getSortingAlgorithm("Quick Sort");
 
-        Function<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> myF3 =
+        BiFunction<ArrayList<Integer>, Boolean, ArrayList<ArrayList<Integer>>> myF3 =
                 sf3.getSortingAlgorithm("Heap Sort");
 
-        Function<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> myF4 =
+        BiFunction<ArrayList<Integer>, Boolean, ArrayList<ArrayList<Integer>>> myF4 =
                 sf4.getSortingAlgorithm("Counting Sort");
 
-        Function<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> myF5 =
+        BiFunction<ArrayList<Integer>, Boolean, ArrayList<ArrayList<Integer>>> myF5 =
                 sf2.getSortingAlgorithm("Merge Sort");
 
-        steps = myF.apply(myList);
+        steps = myF.apply(myList, true);
         displaySteps(steps);
 
         System.out.println();
 
-        steps = myF2.apply(myList);
+        steps = myF2.apply(myList, true);
         displaySteps(steps);
 
         System.out.println();
 
-        steps = myF3.apply(myList);
+        steps = myF3.apply(myList, true);
         displaySteps(steps);
 
         System.out.println();
 
-        steps = myF4.apply(myList);
+        steps = myF4.apply(myList, true);
         displaySteps(steps);
 
         System.out.println();
 
-        steps = myF5.apply(myList);
+        steps = myF5.apply(myList, true);
         displaySteps(steps);
     }
 

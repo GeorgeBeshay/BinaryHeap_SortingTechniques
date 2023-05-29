@@ -1,6 +1,7 @@
 package Sorting_Algorithms;
 
 import java.util.ArrayList;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.Random;
 
@@ -15,7 +16,7 @@ public class EfficientSort_Factory <T extends Comparable<T>> extends SortFactory
      */
 
     @Override
-    public Function<ArrayList<T>, ArrayList<ArrayList<T>>> getSortingAlgorithm(String algorithmName) {
+    public BiFunction<ArrayList<T>, Boolean, ArrayList<ArrayList<T>>> getSortingAlgorithm(String algorithmName) {
         switch (algorithmName){
             case "Merge Sort":
                 return this::mergeSort;
@@ -28,15 +29,17 @@ public class EfficientSort_Factory <T extends Comparable<T>> extends SortFactory
     }
 
     // Assigned to >> George Selim.
-    public ArrayList<ArrayList<T>> mergeSort(ArrayList<T> input){
+    public ArrayList<ArrayList<T>> mergeSort(ArrayList<T> input, boolean stepsRequired){
         input = (ArrayList<T>)input.clone();
         ArrayList<ArrayList<T>> result = new ArrayList<>();
         result.add(new ArrayList<>(input)); // Add the initial input list to the result
-        mergeSortHelper(input, result);
+        ArrayList<T> finalAnswer = mergeSortHelper(input, result, stepsRequired);
+        if(!stepsRequired)
+            result.add(finalAnswer);
         return result;
     }
 
-    private ArrayList<T> mergeSortHelper(ArrayList<T> input, ArrayList<ArrayList<T>> result) {
+    private ArrayList<T> mergeSortHelper(ArrayList<T> input, ArrayList<ArrayList<T>> result, boolean stepsRequired) {
         if (input.size() <= 1) {
             result.add(input);
             return input;
@@ -46,13 +49,13 @@ public class EfficientSort_Factory <T extends Comparable<T>> extends SortFactory
         ArrayList<T> left = new ArrayList<>(input.subList(0, mid));
         ArrayList<T> right = new ArrayList<>(input.subList(mid, input.size()));
 
-        ArrayList<T> leftResult = mergeSortHelper(left, result);
-        ArrayList<T> rightResult = mergeSortHelper(right, result);
+        ArrayList<T> leftResult = mergeSortHelper(left, result, stepsRequired);
+        ArrayList<T> rightResult = mergeSortHelper(right, result, stepsRequired);
 
-        return merge(leftResult, rightResult, result);
+        return merge(leftResult, rightResult, result, stepsRequired);
     }
 
-    private ArrayList<T> merge(ArrayList<T> left, ArrayList<T> right, ArrayList<ArrayList<T>> result) {
+    private ArrayList<T> merge(ArrayList<T> left, ArrayList<T> right, ArrayList<ArrayList<T>> result, boolean stepsRequired) {
         ArrayList<T> merged = new ArrayList<>();
         int leftIndex = 0;
         int rightIndex = 0;
@@ -76,30 +79,32 @@ public class EfficientSort_Factory <T extends Comparable<T>> extends SortFactory
             merged.add(right.get(rightIndex));
             rightIndex++;
         }
-
-        result.add(new ArrayList<>(merged)); // Add the merged list to the result
+        if(stepsRequired)
+            result.add(new ArrayList<>(merged)); // Add the merged list to the result
         return merged;
     }
 
-    public ArrayList<ArrayList<T>> quickSort (ArrayList<T> list) {
+    public ArrayList<ArrayList<T>> quickSort (ArrayList<T> list, boolean stepsRequired) {
         list = (ArrayList<T>)list.clone();
         ArrayList<ArrayList<T>> ordered_list = new ArrayList<>();
         ordered_list.add((ArrayList<T>) list.clone());
         if (list == null || list.size() == 0)
             return ordered_list;
-        Q_Sort(list , 0 , list.size()-1 , ordered_list);
+        Q_Sort(list , 0 , list.size()-1 , ordered_list, stepsRequired);
+        if(!stepsRequired)
+            ordered_list.add((ArrayList<T>) list.clone());
         return ordered_list;
     }
 
-    private void  Q_Sort(ArrayList<T> list , int low , int high , ArrayList<ArrayList<T>> ordered_list ) {
+    private void  Q_Sort(ArrayList<T> list , int low , int high , ArrayList<ArrayList<T>> ordered_list, boolean stepsRequired) {
         if(low < high) {
-            int pivotIndex = partition(list , low , high , ordered_list);
-            Q_Sort(list , low , pivotIndex-1 , ordered_list);
-            Q_Sort(list , pivotIndex+1 , high , ordered_list);
+            int pivotIndex = partition(list , low , high , ordered_list, stepsRequired);
+            Q_Sort(list , low , pivotIndex-1 , ordered_list, stepsRequired);
+            Q_Sort(list , pivotIndex+1 , high , ordered_list, stepsRequired);
         }
     }
 
-    private int partition(ArrayList<T> list , int low_index , int high_index , ArrayList<ArrayList<T>> ordered_list) {
+    private int partition(ArrayList<T> list , int low_index , int high_index , ArrayList<ArrayList<T>> ordered_list, boolean stepsRequired) {
 
         // choosing the pivot randomly then putting it in the high index
         Random random = new Random();
@@ -119,7 +124,8 @@ public class EfficientSort_Factory <T extends Comparable<T>> extends SortFactory
 
         // put the pivot in its correct place (item from left place)
         swap(list, i+1 , high_index);
-        ordered_list.add((ArrayList<T>) list.clone());
+        if(stepsRequired)
+            ordered_list.add((ArrayList<T>) list.clone());
         return i+1;
     }
 

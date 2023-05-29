@@ -10,14 +10,14 @@ def generate_testcase(testNumber):
     @Test
     public void testSortingTechniques""" + f'{testNumber}' + """(){
         ArrayList<Integer> list = generateRandomList(1000);
-        ArrayList<Integer> output1 = getLastList(simpleSF.getSortingAlgorithm("Insertion Sort").apply(list));
-        ArrayList<Integer> output2 = getLastList(simpleSF.getSortingAlgorithm("Bubble Sort").apply(list));
-        ArrayList<Integer> output3 = getLastList(simpleSF.getSortingAlgorithm("Selection Sort").apply(list));
-        ArrayList<Integer> output4 = getLastList(efficientSF.getSortingAlgorithm("Merge Sort").apply(list));
-        ArrayList<Integer> output5 = getLastList(efficientSF.getSortingAlgorithm("Quick Sort").apply(list));
-        ArrayList<Integer> output6 = getLastList(nonComparisonSF.getSortingAlgorithm("Counting Sort").apply(list));
-        ArrayList<Integer> output7 = getLastList(nonComparisonSF.getSortingAlgorithm("Radix Sort").apply(list));
-        ArrayList<Integer> output8 = getLastList(heapSF.getSortingAlgorithm("Heap Sort").apply(list));
+        ArrayList<Integer> output1 = getLastList(simpleSF.getSortingAlgorithm("Insertion Sort").apply(list, false));
+        ArrayList<Integer> output2 = getLastList(simpleSF.getSortingAlgorithm("Bubble Sort").apply(list, false));
+        ArrayList<Integer> output3 = getLastList(simpleSF.getSortingAlgorithm("Selection Sort").apply(list, false));
+        ArrayList<Integer> output4 = getLastList(efficientSF.getSortingAlgorithm("Merge Sort").apply(list, false));
+        ArrayList<Integer> output5 = getLastList(efficientSF.getSortingAlgorithm("Quick Sort").apply(list, false));
+        ArrayList<Integer> output6 = getLastList(nonComparisonSF.getSortingAlgorithm("Counting Sort").apply(list, false));
+        ArrayList<Integer> output7 = getLastList(nonComparisonSF.getSortingAlgorithm("Radix Sort").apply(list, false));
+        ArrayList<Integer> output8 = getLastList(heapSF.getSortingAlgorithm("Heap Sort").apply(list, false));
         Collections.sort(list);
         for(int i = 0 ; i < list.size() ; i++){
             assertEquals(list.get(i), output1.get(i));
@@ -38,10 +38,10 @@ def generate_testcase(testNumber):
     # testcase += """{
     #     Integer[] array = """ + f"""{string_literal};""" + """
     #     ArrayList<Integer> list = new ArrayList<>(Arrays.asList(array));
-    #     ArrayList<Integer> output1 = getLastList(simpleSF.getSortingAlgorithm("Insertion Sort").apply(list));
-    #     ArrayList<Integer> output2 = getLastList(efficientSF.getSortingAlgorithm("Merge Sort").apply(list));
-    #     ArrayList<Integer> output3 = getLastList(nonComparisonSF.getSortingAlgorithm("Counting Sort").apply(list));
-    #     ArrayList<Integer> output4 = getLastList(heapSF.getSortingAlgorithm("Heap Sort").apply(list));
+    #     ArrayList<Integer> output1 = getLastList(simpleSF.getSortingAlgorithm("Insertion Sort").apply(list, false));
+    #     ArrayList<Integer> output2 = getLastList(efficientSF.getSortingAlgorithm("Merge Sort").apply(list, false));
+    #     ArrayList<Integer> output3 = getLastList(nonComparisonSF.getSortingAlgorithm("Counting Sort").apply(list, false));
+    #     ArrayList<Integer> output4 = getLastList(heapSF.getSortingAlgorithm("Heap Sort").apply(list, false));
     #     Collections.sort(list);
     #     for(int i = 0 ; i < list.size() ; i++){
     #         assertEquals(list.get(i), output1.get(i));
