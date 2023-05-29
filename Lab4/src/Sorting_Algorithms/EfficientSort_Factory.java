@@ -84,57 +84,43 @@ public class EfficientSort_Factory <T extends Comparable<T>> extends SortFactory
     public ArrayList<ArrayList<T>> quickSort (ArrayList<T> list) {
         list = (ArrayList<T>)list.clone();
         ArrayList<ArrayList<T>> ordered_list = new ArrayList<>();
+        ordered_list.add((ArrayList<T>) list.clone());
         if (list == null || list.size() == 0)
             return ordered_list;
-        Q_Sort(list , 0 , list.size()-1, ordered_list);
+        Q_Sort(list , 0 , list.size()-1 , ordered_list);
         return ordered_list;
     }
 
-    private void  Q_Sort(ArrayList<T> list , int low_index , int high_index,
-                         ArrayList<ArrayList<T>> ordered_list) {
-
-        if (low_index >= high_index) {
-            return;
+    private void  Q_Sort(ArrayList<T> list , int low , int high , ArrayList<ArrayList<T>> ordered_list ) {
+        if(low < high) {
+            int pivotIndex = partition(list , low , high , ordered_list);
+            Q_Sort(list , low , pivotIndex-1 , ordered_list);
+            Q_Sort(list , pivotIndex+1 , high , ordered_list);
         }
-        ordered_list.add((ArrayList<T>) list.clone());
+    }
 
+    private int partition(ArrayList<T> list , int low_index , int high_index , ArrayList<ArrayList<T>> ordered_list) {
+
+        // choosing the pivot randomly then putting it in the high index
         Random random = new Random();
         int pivot_index = random.nextInt(high_index - low_index + 1) + low_index;
         T pivot = list.get(pivot_index);
         swap(list , pivot_index , high_index);
 
+        int i = low_index-1;
 
-        int left_pointer = partition(list , low_index , high_index , pivot);
-        Q_Sort(list , low_index , left_pointer-1, ordered_list);
-        Q_Sort(list , left_pointer+1 , high_index, ordered_list);
-    }
-
-    private  int partition(ArrayList<T> list , int low_index , int high_index , T pivot) {
-        int left_pointer = low_index;
-        int right_pointer = high_index-1;
-
-        while(left_pointer < right_pointer) {
-            // move from left till reaching a value > pivot , or hit the right_pointer
-            while(list.get(left_pointer).compareTo(pivot) <= 0 && left_pointer < right_pointer) {
-                left_pointer++;
+        // check each element and swaps it before the pivot if its value is smaller.
+        for (int j = low_index ; j < high_index; j++) {
+            if (list.get(j).compareTo(pivot) <= 0) {
+                i++;
+                swap(list, i, j);
             }
+        }
 
-            // move from right till reaching a value < pivot , or hit the left_pointer
-            while(list.get(right_pointer).compareTo(pivot) >= 0 && left_pointer < right_pointer) {
-                right_pointer--;
-            }
-
-            // once found
-            swap(list , left_pointer , right_pointer);
-        }
-        // check before swapping and putting the pivot in its right place
-        if(list.get(left_pointer).compareTo(list.get(high_index)) > 0) {
-            swap(list , left_pointer , high_index);
-        }
-        else {
-            left_pointer = high_index;
-        }
-        return  left_pointer;
+        // put the pivot in its correct place (item from left place)
+        swap(list, i+1 , high_index);
+        ordered_list.add((ArrayList<T>) list.clone());
+        return i+1;
     }
 
     private void swap(ArrayList<T> list, int i, int j) {
