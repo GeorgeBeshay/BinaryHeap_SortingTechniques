@@ -23,7 +23,7 @@ public class NonComparisonSort_Factory<T extends Comparable<T>> extends SortFact
             case "Counting Sort":
                 return this::countingSort;
             case "Radix Sort":
-                return this::radixSort; // TODO: Change the returned function.
+                return this::radixSort;
             default:
                 break;
         }
@@ -61,7 +61,7 @@ public class NonComparisonSort_Factory<T extends Comparable<T>> extends SortFact
 
     public ArrayList<ArrayList<T>> radixSort(ArrayList<T> in, boolean stepsRequired){
         ArrayList<ArrayList<T>> ordered_list = new ArrayList<>();
-        ArrayList<Integer> list = (ArrayList<Integer>) in;
+        ArrayList<Integer> list = (ArrayList<Integer>) in.clone();
         if (list == null || list.size() == 0) {
             return ordered_list;
         }

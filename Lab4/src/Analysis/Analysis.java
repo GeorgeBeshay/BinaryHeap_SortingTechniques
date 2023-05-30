@@ -41,17 +41,17 @@ public class Analysis {
             ArrayList<Long> tempObservation = new ArrayList<>();
 
             t1 = System.nanoTime();
-//            (simpleSortFactory.getSortingAlgorithm("Insertion Sort")).apply(experimentList, false);
+            (simpleSortFactory.getSortingAlgorithm("Insertion Sort")).apply(experimentList, false);
             t2 = System.nanoTime();
             tempObservation.add(t2 - t1);
 
             t1 = System.nanoTime();
-//            (simpleSortFactory.getSortingAlgorithm("Bubble Sort")).apply(experimentList, false);
+            (simpleSortFactory.getSortingAlgorithm("Bubble Sort")).apply(experimentList, false);
             t2 = System.nanoTime();
             tempObservation.add(t2 - t1);
 
             t1 = System.nanoTime();
-//            (simpleSortFactory.getSortingAlgorithm("Selection Sort")).apply(experimentList, false);
+            (simpleSortFactory.getSortingAlgorithm("Selection Sort")).apply(experimentList, false);
             t2 = System.nanoTime();
             tempObservation.add(t2 - t1);
 

@@ -8,15 +8,18 @@ public class SimpleSort_Factory<T extends Comparable<T>> extends SortFactory<T>{
 
     @Override
     public BiFunction<ArrayList<T>, Boolean, ArrayList<ArrayList<T>>> getSortingAlgorithm(String algorithmName) {
-        switch (algorithmName){
-            case "Selection Sort":
-                return this::insertionSort; // TODO: Change the returned function
-            case "Bubble Sort":
-                return this::insertionSort; // TODO: Change the returned function
-            case "Insertion Sort":
+        switch (algorithmName) {
+            case "Selection Sort" -> {
+                return this::selectionSort;
+            }
+            case "Bubble Sort" -> {
+                return this::bubbleSort;
+            }
+            case "Insertion Sort" -> {
                 return this::insertionSort;
-            default:
-                break;
+            }
+            default -> {
+            }
         }
         return null;
     }
@@ -32,14 +35,53 @@ public class SimpleSort_Factory<T extends Comparable<T>> extends SortFactory<T>{
     // The below functions are assigned to >> Islam & Mkario
 
     public ArrayList<ArrayList<T>> selectionSort(ArrayList<T> input, boolean stepsRequired){
-        System.out.println("In Selection Sort ...");
-        // Implement Me
-        return null;
+        // Declaring Variables
+        input = (ArrayList<T>)input.clone();
+        ArrayList<ArrayList<T>> steps = new ArrayList<>();
+        steps.add((ArrayList<T>)input.clone());
+        int smallestElementIndex;
+
+        for(int i = 0 ; i < input.size() - 1 ; i++){
+            smallestElementIndex = i;
+            for(int j = i+1 ; j < input.size() ; j++){
+                if(input.get(j).compareTo(input.get(smallestElementIndex)) < 0)
+                    smallestElementIndex = j;
+            }
+            swap(input, i, smallestElementIndex);
+            if(stepsRequired)
+                steps.add((ArrayList<T>)input.clone());
+        }
+
+        if(!stepsRequired)
+            steps.add((ArrayList<T>)input.clone());
+        return steps;
     }
 
     public ArrayList<ArrayList<T>> bubbleSort(ArrayList<T> input, boolean stepsRequired){
+        // Declaring Variables
+        input = (ArrayList<T>)input.clone();
+        ArrayList<ArrayList<T>> steps = new ArrayList<>();
+        steps.add((ArrayList<T>)input.clone());
+        boolean swapped = false;
 
-        return null;
+        for(int i = 0 ; i < input.size() ; i++){
+            swapped = false;
+            for(int j = 0 ; j < input.size() - i - 1 ; j++){
+                if(input.get(j).compareTo(input.get(j+1)) > 0){
+                    swapped = true;
+                    swap(input, j, j+1);
+                    if(stepsRequired)
+                        steps.add((ArrayList<T>)input.clone());
+                }
+            }
+            if(!swapped)    // Optimization
+                break;
+        }
+
+        if(!stepsRequired)
+            steps.add((ArrayList<T>)input.clone());
+
+        return steps;
     }
 
     public ArrayList<ArrayList<T>> insertionSort (ArrayList<T> list, boolean stepsRequired) {

@@ -1,10 +1,8 @@
 package Sorting_Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.function.*;
-import java.util.random.*;
 
 public class Main {
 
@@ -44,11 +42,11 @@ public class Main {
         BiFunction<ArrayList<Integer>, Boolean, ArrayList<ArrayList<Integer>>> myF6 =
                 sf4.getSortingAlgorithm("Radix Sort");
 
-//        BiFunction<ArrayList<Integer>, Boolean, ArrayList<ArrayList<Integer>>> myF7 =
-//                sf.getSortingAlgorithm("Bubble Sort");
-//
-//        BiFunction<ArrayList<Integer>, Boolean, ArrayList<ArrayList<Integer>>> myF8 =
-//                sf.getSortingAlgorithm("Selection Sort");
+        BiFunction<ArrayList<Integer>, Boolean, ArrayList<ArrayList<Integer>>> myF7 =
+                sf.getSortingAlgorithm("Bubble Sort");
+
+        BiFunction<ArrayList<Integer>, Boolean, ArrayList<ArrayList<Integer>>> myF8 =
+                sf.getSortingAlgorithm("Selection Sort");
 
         steps = myF.apply(myList, true);
         displaySteps(steps);
@@ -80,15 +78,15 @@ public class Main {
 
         System.out.println();
 
-//        steps = myF7.apply(myList, true);
-//        displaySteps(steps);
-//
-//        System.out.println();
-//
-//        steps = myF8.apply(myList, true);
-//        displaySteps(steps);
-//
-//        System.out.println();
+        steps = myF7.apply(myList, false);
+        displaySteps(steps);
+
+        System.out.println();
+
+        steps = myF8.apply(myList, false);
+        displaySteps(steps);
+
+        System.out.println();
     }
 
     public static <T> void displaySteps(ArrayList<ArrayList<T>> list){
