@@ -46,6 +46,9 @@ public class CLI {
                 System.out.println("3. Non Comparison Sort - Counting Sort");
                 System.out.println("4. Heap Sort");
                 System.out.println("5. Efficient Sort - Quick Sort");
+                System.out.println("6. Non Comparison Sort - Radix Sort");
+//                System.out.println("7. Simple Sort - Bubble Sort");
+//                System.out.println("8. Simple Sort - Selection Sort");
                 System.out.println("To Change the input file enter -1");
                 System.out.println("To exit the application enter -9");
                 tempChoiceNumber = scanner.nextInt();
@@ -71,6 +74,15 @@ public class CLI {
                     case 5:
                         mySortingFunction = this.efficientSF.getSortingAlgorithm("Quick Sort");
                         break;
+                    case 6:
+                        mySortingFunction = this.nonComparisonSF.getSortingAlgorithm("Radix Sort");
+                        break;
+//                    case 7:
+//                        mySortingFunction = this.simpleSF.getSortingAlgorithm("Bubble Sort");
+//                        break;
+//                    case 8:
+//                        mySortingFunction = this.simpleSF.getSortingAlgorithm("Selection Sort");
+//                        break;
                     default:
                         System.out.println("Wrong input was passed, please try again.");
                         continue;
@@ -103,7 +115,7 @@ public class CLI {
     }
 
     public static ArrayList<Integer> importData(String fileName) {
-        fileName = System.getProperty("user.dir").concat("/src/IO/").concat(fileName);
+        fileName = System.getProperty("user.dir").concat("/src/Scripts_and_RandomData/").concat(fileName);
         ArrayList<Integer> data = new ArrayList<>();
         File file = new File(fileName);
         try {

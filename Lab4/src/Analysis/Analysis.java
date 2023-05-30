@@ -21,13 +21,13 @@ public class Analysis {
 
     public static void main(String[] args) {
         // Declaring Variables
-//        int[] sizes = {10, 100, 500, 1000, 1500, 2000, 5000,
-//                10000, 20000, 40000, 50000, 70000, 90000,
-//                100000, }; // in case of running the simple sort algorithms, use this version.
         int[] sizes = {10, 100, 500, 1000, 1500, 2000, 5000,
                 10000, 20000, 40000, 50000, 70000, 90000,
-                100000, 200000, 400000, 500000, 750000, 900000, 1000000,
-                2000000, 2250000, 2400000, 2600000, 2800000, 3000000};
+                100000, }; // in case of running the simple sort algorithms, use this version.
+//        int[] sizes = {10, 100, 500, 1000, 1500, 2000, 5000,
+//                10000, 20000, 40000, 50000, 70000, 90000,
+//                100000, 200000, 400000, 500000, 750000, 900000, 1000000,
+//                2000000, 2250000, 2400000, 2600000, 2800000, 3000000};
         SortFactory<Integer> simpleSortFactory = new SimpleSort_Factory<>();
         SortFactory<Integer> efficientSortFactory = new EfficientSort_Factory<>();
         SortFactory<Integer> heapSortFactory = new HeapSort_Factory<>();
@@ -71,7 +71,7 @@ public class Analysis {
             tempObservation.add(t2 - t1);
 
             t1 = System.nanoTime();
-//            (nonComparisonSortFactory.getSortingAlgorithm("Radix Sort")).apply(experimentList, false);
+            (nonComparisonSortFactory.getSortingAlgorithm("Radix Sort")).apply(experimentList, false);
             t2 = System.nanoTime();
             tempObservation.add(t2 - t1);
 
