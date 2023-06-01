@@ -127,4 +127,14 @@ public class Sort_Array<T extends Comparable<T>> {
         return null;
     }
 
+    /*
+     * Takes 1 parameter which is whether to turn the intermediate arrays or
+     * return the final sorted array. Then applies the heap sorting algorithm on the variable "data"
+     * and either return the intermediate results or the final result
+     */
+    public ArrayList<ArrayList<T>> heapSort(boolean finalOnly){
+        return ((new HeapSort_Factory<T>()).getSortingAlgorithm("Heap Sort"))
+                .apply(data, finalOnly);
+    }
+
 }
